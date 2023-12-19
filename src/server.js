@@ -3,6 +3,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
+const bodyParser = require("body-parser");
 const app = express();
 const port = 3000;
 
@@ -36,6 +37,8 @@ let users = [
 //Middleware
 app.use(morgan("dev"));
 app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 //Routes
 app.get("/", (req, res) => {
@@ -51,25 +54,25 @@ app.get("/api/users", (request, response) => {
 
 app.get("/api/users/town", (request, response) => {
   const townsArray = users.map((userObj) => userObj.town);
-  console.log(townsArray);
+  //   console.log(townsArray);
   response.json(townsArray);
 });
 
 //GET - /api/users/drivers - grazins visus vairuotojus
 app.get("/api/users/drivers", (request, response) => {
   const drivers = users.filter((userObj) => userObj.isDriver === true);
-  console.log(drivers);
+  //   console.log(drivers);
   response.json(drivers);
 });
 
 //GET - /api/users/1 - grazinti konkretu useri
 //:userID dinamine dalis
 app.get("/api/users/:userID", (request, response) => {
-  console.log(request.params);
+  //   console.log(request.params);
   const userID = +request.params.userID;
   // surasti objekta su id === userID ir ji grazinti
   const found = users.find((userObj) => userID === userObj.id);
-  console.log(found);
+  //   console.log(found);
   //TODO not found case
   if (found === undefined) {
     response.status(404).json({ msg: `user with id ${userID} was not found` });
@@ -85,6 +88,12 @@ app.delete("/api/users/:usersId", (request, response) => {
   //grazinti viska isskyrus ta el ant kurio id yra === userID
   users = users.filter((userObj) => userId !== userObj.id);
   response.json(users);
+});
+
+app.post("/api/users", (request, response) => {
+  const data = request.body;
+  users.push(data);
+  response.send(users);
 });
 
 app.listen(port, () => {

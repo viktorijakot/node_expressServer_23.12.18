@@ -30,17 +30,23 @@ function App() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e);
-    setNewUser({
+    const newUser = {
       id: users.length + 1,
       name: e.target[0].value,
       town: e.target[1].value,
       isDriver: e.target[2].checked,
-    });
-    // axios
-    //   .post(URL)
-    //   .then((resp) => setTowns(resp.data))
-    //   .catch((err) => console.log(err));
+    };
+    // setNewUser({
+    //   id: users.length + 1,
+    //   name: e.target[0].value,
+    //   town: e.target[1].value,
+    //   isDriver: e.target[2].checked,
+    // });
+    axios
+      .post("http://localhost:3000/api/users", newUser)
+      .then((resp) => setUsers(resp.data))
+      // .then((resp) => setTowns(resp.data))
+      .catch((err) => console.log(err));
   };
 
   return (

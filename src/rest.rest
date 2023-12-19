@@ -11,7 +11,7 @@ GET http://localhost:3000/api/users/30
 
 ###delete user
 
-DELETE  http://localhost:3000/api/users/2
+DELETE  http://localhost:3000/api/users
 
 ###
 
@@ -20,3 +20,15 @@ GET http://localhost:3000/api/users/town
 ###
 
 GET http://localhost:3000/api/users/drivers
+
+###
+
+POST http://localhost:3000/api/users
+content-type: application/json
+
+{
+    "id": 5,
+    "name": "kiskis",
+    "town": "vilnius",
+    "isDriver": false
+}
