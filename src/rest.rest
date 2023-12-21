@@ -27,8 +27,49 @@ POST http://localhost:3000/api/users
 content-type: application/json
 
 {
-    "id": 5,
-    "name": "kiskis",
+    "name": "mo",
     "town": "vilnius",
     "isDriver": false
 }
+
+
+###all books
+
+GET http://localhost:3000/api/books
+
+###book by title
+
+GET http://localhost:3000/api/books/Book 3
+
+
+###book delete by title
+
+DELETE http://localhost:3000/api/books/Book 2
+
+###create new book
+
+
+###
+
+POST http://localhost:3000/api/books
+content-type: application/json
+
+{
+    "title": "Book 7",
+    "author": "Author 7",
+    "isPublished": true,
+    "year": 1993
+}
+
+### test 
+
+POST http://localhost:3000/api/test
+content-type: application/json
+
+{
+    "title": "Book 7",
+    "author": "Author 7",
+    "isPublished": true,
+    "year": 1993
+}
+
